@@ -1,66 +1,77 @@
-import java.util.HashMap;
-import java.util.Scanner;
+
 import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
 
-/*
- * This example source code demonstrates the use of  
- * put() method of HashMap class
- */
+public class MapsAreCool {
+    // Hint: Create a class or data strucsture hold a student first name
+    // last name, the student's 4 test scores, and letter grade.
+    // Then create your ArrayList to hold objects of this type.
 
-public class HashMapPutExample {
+    public class Student {
+        String firstName;
+        String lastName;
+        ArrayList<Integer> testScores;
+        char letterGrade;
 
-    public static void main(String[] args) throws InterruptedException {
-
-        // declare the hashmap
-        Map<String, List<Integer>> mapStudent = new HashMap<String, List<Integer>>();
-        ArrayList<Integer> list = new ArrayList<Integer>();
-        boolean loopAgain = true;
-        Scanner scan = new Scanner(System.in);
-
-        // loop while user not entering no
-        do {
-            // ask for user input for student name
-            System.out.print("Enter Students Name (Last Name, First Name):");
-            String studentName = scan.nextLine();
-
-            // ask for user input which corresponds to student grades
-            System.out.print("Enter 4 test score grades:");
-            List<Integer> studentGrade = list.add(scanner.nextInt());
-            Integer[] nums = list.toArray(new Integer[0]);
-            for (int i = 0; i < nums.length; i++) {
-                System.out.println(nums[i]);
-            }
-
-            // add the key value pair from user input to the hashmap
-
-            String oldVal = mapStudent.put(studentName, studentGrade);
-
-            if (oldVal != null) {
-                System.out
-                        .println("Student Name:" + studentName + " is " + oldVal + " student's Grades " + studentGrade);
-            }
-
-            // ask user to check if another entry is required
-            System.out.print("Enter another student (y/n)?");
-            String answer = scan.nextLine();
-
-            // condition to satisfy in order to loop again
-            if (answer.equals("y") || answer.equals("Y")) {
-                continue;
-            } else {
-                break;
-            }
-
-        } while (loopAgain);
-        scan.close();
-
-        System.out.println("\n**********************************");
-        System.out.println("The following students are in database");
-        System.out.println("   studentName  " + "      studentGrade");
-        for (String i : mapStudent.keySet()) {
-            System.out.println("   " + i + "     " + mapStudent.get(i));
+        public Student(String myfirstName, String mylastName, ArrayList<Integer> mytestScores) {
+            this.firstName = myfirstName;
+            this.lastName = mylastName;
+            this.testScores = mytestScores;
+            setLetterGrade(mytestScores);
         }
-        System.out.println("\n**********************************");
+
+        public void setLetterGrade(ArrayList<Integer> testScores) {
+            int averageScore = 0;
+            int totalScore = 0;
+            for (int i = 0; i < testScores.size(); i++) {
+                totalScore += testScores.get(i);
+            }
+            averageScore = totalScore / testScores.size();
+
+            if (averageScore >= 90) {
+                letterGrade = 'A';
+            } else if (averageScore >= 80) {
+                letterGrade = 'B';
+            } else if (averageScore >= 70) {
+                letterGrade = 'C';
+            } else if (averageScore >= 60) {
+                letterGrade = 'D';
+            } else {
+                letterGrade = 'F';
+            }
+        }
+    }
+
+    public static void main(String[] args) {
+        MapsAreCool mapsAreCool = new MapsAreCool();
+        ArrayList<Integer> testScores1 = new ArrayList<>();
+        testScores1.add(25);
+        testScores1.add(50);
+        testScores1.add(75);
+        testScores1.add(100);
+        ArrayList<Integer> testScores2 = new ArrayList<>();
+        testScores2.add(80);
+        testScores2.add(85);
+        testScores2.add(90);
+        testScores2.add(100);
+        MapsAreCool.Student student1 = mapsAreCool.new Student("Gabriela", "Davila", testScores1);
+
+        MapsAreCool.Student student2 = mapsAreCool.new Student("Ebomb", "Chel", testScores2);
+        ArrayList<MapsAreCool.Student> students = new ArrayList<MapsAreCool.Student>();
+        students.add(student1);
+        students.add(student2);
+
+        Comparator<MapsAreCool.Student> cmp = new Comparator<MapsAreCool.Student>() {
+            public int compare(MapsAreCool.Student s1, MapsAreCool.Student s2) {
+                return s1.lastName.compareToIgnoreCase(s2.lastName);
+            }
+        };
+        Collections.sort(students, cmp);
+
+        for (MapsAreCool.Student student : students) {
+            System.out.println(student.lastName);
+        }
     }
 
 }

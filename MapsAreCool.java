@@ -1,5 +1,6 @@
 
 import java.util.*;
+import java.util.Scanner;
 import java.util.ArrayList;
 import java.util.Collections;
 
@@ -45,17 +46,36 @@ public class MapsAreCool {
 
     public static void main(String[] args) {
         MapsAreCool mapsAreCool = new MapsAreCool();
-        ArrayList<Integer> testScores1 = new ArrayList<>();
-        testScores1.add(25);
-        testScores1.add(50);
-        testScores1.add(75);
-        testScores1.add(100);
+
+        Scanner scanner = new Scanner(System.in);
+        String fName = new String();
+        String lName = new String();
+        ArrayList<Integer> list = new ArrayList<Integer>();
+
+        System.out.println("Enter student first name");
+        fName = scanner.nextLine();
+        System.out.println("Enter student last name");
+        lName = scanner.nextLine();
+
+        System.out.print("Enter integers please or ");
+        System.out.println("(C to terminate): ");
+
+        while (scanner.hasNextInt()) {
+            list.add(scanner.nextInt());
+        }
+
+        Integer[] nums = list.toArray(new Integer[0]);
+        for (int i = 0; i < nums.length; i++) {
+            System.out.println(nums[i]);
+        }
+        scanner.close();
+
         ArrayList<Integer> testScores2 = new ArrayList<>();
         testScores2.add(80);
         testScores2.add(85);
         testScores2.add(90);
         testScores2.add(100);
-        MapsAreCool.Student student1 = mapsAreCool.new Student("Gabriela", "Davila", testScores1);
+        MapsAreCool.Student student1 = mapsAreCool.new Student(fName, lName, list);
 
         MapsAreCool.Student student2 = mapsAreCool.new Student("Ebomb", "Chel", testScores2);
         ArrayList<MapsAreCool.Student> students = new ArrayList<MapsAreCool.Student>();
@@ -70,7 +90,7 @@ public class MapsAreCool {
         Collections.sort(students, cmp);
 
         for (MapsAreCool.Student student : students) {
-            System.out.println(student.lastName);
+            System.out.println(student.lastName + student.testScores + student.letterGrade);
         }
     }
 

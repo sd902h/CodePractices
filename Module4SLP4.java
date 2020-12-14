@@ -19,19 +19,20 @@ class Module4SLP4 {
         for (int i = 1; i <= vectorSize; i++)
             vector.add(i);
 
-        // Printing elements size
-        System.out.println("The vector size is: " + vector.size());
-        // Printing elements
-        System.out.println("The elements in the vector are: " + vector);
+        System.out.println("Inital vector size is: " + vector.size());
 
+        // Add two more elements
         vector.add(11);
         vector.add(12);
 
-        // Printing elements size
-        System.out.println("The vector size is: " + vector.capacity());
         // Printing elements
         System.out.println("The elements in the vector are: " + vector);
+        // Printing elements size
+        System.out.println("The vector size is: " + vector.size());
+        // Printing elements capacity
+        System.out.println("The vector capacity is: " + vector.capacity());
 
+        // Adding 6 more elements
         vector.add(13);
         vector.add(14);
         vector.add(15);
@@ -39,16 +40,11 @@ class Module4SLP4 {
         vector.add(17);
         vector.add(18);
 
+        // Printing elements
+        System.out.println("The elements in the vector are: " + vector);
         // Printing vector size
         System.out.println("The vector size is: " + vector.size());
         // Printing vector capacity size
         System.out.println("The vector capacity is: " + vector.capacity());
-        // Printing elements
-        System.out.println("The elements in the vector are: " + vector);
-
-        // Printing elements one by one
-        // System.out.println("Printing elements one by one: ");
-        // for (int i = 0; i < vector.size(); i++)
-        // System.out.print(vector.get(i) + " ");
     }
 }

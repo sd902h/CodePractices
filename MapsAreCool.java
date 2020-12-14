@@ -1,4 +1,3 @@
-
 import java.util.*;
 import java.util.Scanner;
 import java.util.ArrayList;
@@ -14,6 +13,7 @@ public class MapsAreCool {
         String lastName;
         ArrayList<Integer> testScores;
         char letterGrade;
+        int averageScore;
 
         public Student(String myfirstName, String mylastName, ArrayList<Integer> mytestScores) {
             this.firstName = myfirstName;
@@ -23,7 +23,6 @@ public class MapsAreCool {
         }
 
         public void setLetterGrade(ArrayList<Integer> testScores) {
-            int averageScore = 0;
             int totalScore = 0;
             for (int i = 0; i < testScores.size(); i++) {
                 totalScore += testScores.get(i);
@@ -48,39 +47,31 @@ public class MapsAreCool {
         MapsAreCool mapsAreCool = new MapsAreCool();
 
         Scanner scanner = new Scanner(System.in);
+        String text = "";
         String fName = new String();
         String lName = new String();
-        ArrayList<Integer> list = new ArrayList<Integer>();
+        ArrayList<MapsAreCool.Student> students = new ArrayList<MapsAreCool.Student>();
 
-        System.out.println("Enter student first name");
-        fName = scanner.nextLine();
-        System.out.println("Enter student last name");
-        lName = scanner.nextLine();
-
-        System.out.print("Enter integers please or ");
-        System.out.println("(C to terminate): ");
-
-        while (scanner.hasNextInt()) {
+        while (!text.equals("C")) {
+            ArrayList<Integer> list = new ArrayList<Integer>();
+            System.out.println("Enter student first name");
+            fName = scanner.next();
+            System.out.println("Enter student last name");
+            lName = scanner.next();
+            System.out.println("Enter student first score");
             list.add(scanner.nextInt());
-        }
-
-        Integer[] nums = list.toArray(new Integer[0]);
-        for (int i = 0; i < nums.length; i++) {
-            System.out.println(nums[i]);
+            System.out.println("Enter student second score");
+            list.add(scanner.nextInt());
+            System.out.println("Enter student third score");
+            list.add(scanner.nextInt());
+            System.out.println("Enter student fourth score");
+            list.add(scanner.nextInt());
+            System.out.println("Want to enter another student information? Enter 'Y' to continue or 'C' to end.");
+            text = scanner.next();
+            MapsAreCool.Student eachStudent = mapsAreCool.new Student(fName, lName, list);
+            students.add(eachStudent);
         }
         scanner.close();
-
-        ArrayList<Integer> testScores2 = new ArrayList<>();
-        testScores2.add(80);
-        testScores2.add(85);
-        testScores2.add(90);
-        testScores2.add(100);
-        MapsAreCool.Student student1 = mapsAreCool.new Student(fName, lName, list);
-
-        MapsAreCool.Student student2 = mapsAreCool.new Student("Ebomb", "Chel", testScores2);
-        ArrayList<MapsAreCool.Student> students = new ArrayList<MapsAreCool.Student>();
-        students.add(student1);
-        students.add(student2);
 
         Comparator<MapsAreCool.Student> cmp = new Comparator<MapsAreCool.Student>() {
             public int compare(MapsAreCool.Student s1, MapsAreCool.Student s2) {
@@ -90,7 +81,9 @@ public class MapsAreCool {
         Collections.sort(students, cmp);
 
         for (MapsAreCool.Student student : students) {
-            System.out.println(student.lastName + student.testScores + student.letterGrade);
+            System.out.println("First name: " + student.firstName + "\n" + "Last name: " + student.lastName + "\n"
+                    + "Average score: " + student.averageScore + "\n" + "Student grade: " + student.letterGrade
+                    + "\n\n");
         }
     }
 

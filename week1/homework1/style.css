@@ -1,0 +1,24 @@
+.body {
+  font-family: "Arial", "Helvetica Neue", Helvetica, sans-serif;
+  color: #777;
+  background: #777;
+  width: 960px;
+  font-size: 18px;
+}
+
+.header {
+  margin-top: 10px;
+  margin-right: 60px;
+  margin-left: 60px;
+  text-align: center;
+  background: #ebebeb;
+  font-size: 40px;
+}
+.Nav {
+  overflow-inline: 2px;
+  margin-right: 60px;
+  margin-left: 60px;
+  text-align: center;
+  background: #ebebeb;
+  font-size: 20px;
+}

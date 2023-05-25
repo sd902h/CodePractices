@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Events!</title>
+
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+    />
+  </head>
+  <body>
+    <div class="container">
+      <div class="row">
+        <div class="col-md-offset-2 col-md-8">
+          <div class="jumbotron">
+            <h2>
+              Let's Play Rock Paper Scissors
+            </h2>
+            <h2>
+              User Drawed
+              <span id="user-text"><strong>...Nothing.</strong></span>
+            </h2>
+            <h2>
+              Computer Drawed
+              <span id="comp-text"><strong>...Nothing.</strong></span>
+            </h2>
+            <h2>
+              User Total is:
+              <span id="user-total"><strong>...Nothing.</strong></span>
+            </h2>
+            <h2>
+              Computer Total is:
+              <span id="comp-total"><strong>...Nothing.</strong></span>
+            </h2>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- We have to put this at the end of our document to ensure the user-text
+         span exists when we try to access it. -->
+    <script type="text/javascript">
+      //Two sides to control lets start with the opponent
+      //opponent = array with options R, P, S
+      var compArray = ["R", "P", "S"];
+      function random_item(compArray) {
+        return compArray[Math.floor(Math.random() * compArray.length)];
+      }
+
+      //opponent selection will be determined on random
+      //opponent selection will be triggered on event of user selection
+      //Will store user selection by keyup
+      //have an empty var that takes count of wins for user
+      //have an empty var that takes count of wins for opponent
+      //if user text = opponent text then count for opponent and user stay the same
+      //if user text = P and opponent = R || user = S and opponent = P || user = R and opp = S then user count = count++
+      //elseif opponent count = count ++
+      //if user text = opponent text then count for opponent and user stay the same
+      // Let's start by grabbing a reference to the <span> below.
+      var userTotal = document.getElementById("comp-total");
+      var compTotal = document.getElementById("user-total");
+      var compText = document.getElementById("comp-text");
+      var userText = document.getElementById("user-text");
+      var userTot = 0;
+      var compTot = 0;
+
+      // Next, we give JavaScript a function to execute when onkeyup event fires.
+      document.onkeyup = function(event) {
+        var user = (userText.textContent = event.key);
+        var compSelect = random_item(compArray);
+        var comp = (compText.textContent = compSelect);
+
+        if (
+          (user == "P" && comp == "R") ||
+          (user == "S" && comp == "P") ||
+          (user == "R" && comp == "S")
+        ) {
+          userTot = ++userTot;
+          console.log(userTot);
+          userTotal.textContent = userTot;
+        } else if (
+          (comp == "P" && user == "R") ||
+          (comp == "S" && user == "P") ||
+          (comp == "R" && user == "S")
+        ) {
+          compTot = ++compTot;
+          compTotal.textContent = compTot;
+        } else {
+          userTot = userTot;
+          compTot = compTot;
+        }
+      };
+    </script>
+  </body>
+</html>

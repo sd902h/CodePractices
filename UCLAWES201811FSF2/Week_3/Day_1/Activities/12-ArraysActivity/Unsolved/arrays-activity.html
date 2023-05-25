@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Array Activity - Unsolved</title>
+  </head>
+  <body>
+    <h1>Open the console to see the magic!</h1>
+
+    <script type="text/javascript">
+      // Fill in the question marks with what the output will be.
+      var animals = ["parrot", "cat", "dog"];
+
+      // ??? prints 3. because there are 3 items in the array.
+      console.log(animals.length);
+
+      // ??? prints cat
+      console.log(animals[1]);
+
+      // ??? prints dog
+      console.log(animals[2]);
+
+      // ??? prints parrot
+      console.log(animals[0]);
+
+      // ??? This can be simplified to animals[3] . Do PEMDAS work your way inside the []. That's the array length
+      //which you know is 3.
+      //The final result is undefied because there is no animal in that index.
+      console.log(animals[animals.length]);
+
+      // ??? logs the animal dog
+      console.log(animals[animals.length - 1]);
+
+      // ??? logs the index (number place in array).
+      //Since "bear" isn't in the animals array the final answer is -1
+      console.log(animals.indexOf("bear"));
+
+      // ??? logs 0 because that's "parrot"
+      console.log(animals.indexOf("parrot"));
+    </script>
+  </body>
+</html>

@@ -18,8 +18,20 @@
               <span id="car-make"><strong>....</strong></span>
             </h2>
             <h2>
-              To get the car's model, type "model"
+              To get the car's model, type "2"
               <span id="car-model"><strong>....</strong></span>
+            </h2>
+            <h2>
+              To get the car's color, type "3"
+              <span id="car-color"><strong>....</strong></span>
+            </h2>
+            <h2>
+              To get the car's mileage, type "4"
+              <span id="car-mileage"><strong>....</strong></span>
+            </h2>
+            <h2>
+              To get the car's stats, type "5"
+              <span id="car-stats"><strong>....</strong></span>
             </h2>
           </div>
         </div>
@@ -59,18 +71,44 @@
 
         honk: function() {
           alert("Honk! Honk!");
+        },
+        reWriteStats: function() {
+          alert(
+            "mileage: " +
+              this.mileage +
+              ",make: " +
+              this.make +
+              ",color: " +
+              this.color +
+              ",mileage: " +
+              this.mileage +
+              ",is the car functioning? :" +
+              this.isWorking
+          );
         }
       };
 
       var carMake = document.getElementById("car-make");
       var carModel = document.getElementById("car-model");
+      var carColor = document.getElementById("car-color");
+      var carMileage = document.getElementById("car-mileage");
+      var carStats = document.getElementById("car-stats");
 
       // Next, we give JavaScript a function to execute when onkeyup event fires.
       document.onkeyup = function(event) {
         if (event.key === "1") {
-          carMake.textContent = car.make;
+          var runMake = (carMake.textContent = car.make);
+        }
+        if (event.key === "2") {
+          var runModel = (carModel.textContent = car.model);
+        }
+        if (event.key === "3") {
+          var runColor = (carColor.textContent = car.color);
+        }
+        if (event.key === "4") {
+          var runMileage = (carMileage.textContent = car.mileage);
         } else {
-          carModel.textContent = car.model;
+          var runStats = (carStats.textContent = car.reWriteStats);
         }
       };
     </script>

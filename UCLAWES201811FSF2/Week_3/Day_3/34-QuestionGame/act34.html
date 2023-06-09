@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>QuestionGame</title>
+  </head>
+  <body>
+    <div>
+      <p id="directions-text">
+        Answer the below question with t for true, or f for false
+      </p>
+      <p id="question"></p>
+      <p id="answer"></p>
+      <p id="score"></p>
+    </div>
+    <script>
+      // Creating variables to hold the number of wins, losses, and ties. They start at 0.
+      var score = 0;
+      var questionIndex = 0;
+
+      var questions = [
+        { q: "Do you like baseball?", a: "t" },
+        { q: "Do you listen to RnB?", a: "f" },
+        { q: "Do you have a pet?", a: "t" },
+        { q: "Can you sing?", a: "t" },
+        { q: "Do you own a car?", a: "f" },
+        { q: "Do you like coding?", a: "t" },
+        { q: "Do you like dancing?", a: "t" },
+        { q: "Do you like roller skating", a: "f" },
+        { q: "Do you like concerts?", a: "f" },
+        { q: "Can you dance?", a: "f" }
+      ];
+
+      // Create variables that hold references to the places in the HTML where we want to display things.
+      function runQuestions() {
+        // If there are still more questions, render the next one.
+        if (questionIndex <= questions.length - 1) {
+          document.querySelector("#question").innerHTML =
+            questions[questionIndex].q;
+        }
+        // If there aren't, render the end game screen.
+        else {
+          document.querySelector("#question").innerHTML = "Game Over!";
+          document.querySelector("#score").innerHTML =
+            "Final Score: " + score + " out of " + questions.length;
+        }
+      }
+      // Function that updates the score...
+      function updateScore() {
+        document.querySelector("#score").innerHTML = "Score: " + score;
+      }
+
+      //start the game
+      runQuestions();
+      updateScore();
+
+      // Captures keyboard input. Depending on the letter pressed it will "call" (execute) different functions.
+      document.onkeyup = function(event) {
+        // If there are no more questions, stop the function.
+        if (questionIndex === questions.length) {
+          return;
+        }
+
+        // Captures the key press, converts it to lowercase, and saves it to a variable.
+        var userGuess = event.key.toLowerCase();
+        if (userGuess === "t" || userGuess === "f") {
+          if (userGuess === questions[questionIndex].a) {
+            document.querySelector("#answer").innerHTML =
+              "Answer: " +
+              questions[questionIndex].a +
+              " " +
+              "You guessed: " +
+              " " +
+              userGuess;
+            score++;
+            updateScore();
+          } else {
+            alert("wrong");
+          }
+          questionIndex++;
+          runQuestions();
+        }
+      };
+    </script>
+  </body>
+</html>

@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Correct Color Picker</title>
+
+    <!-- Bootstrap File -->
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+    />
+
+    <!-- JQuery -->
+    <script src="https://code.jquery.com/jquery.js"></script>
+
+    <style>
+      #rand-target-color,
+      #color-picker li {
+        font-size: 24px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h2>Correct Color Picker</h2>
+      <p>Pick the <b>color</b> of the word shown from the list below it.</p>
+
+      <div class="card">
+        <div class="card-header">
+          <h3 class="card-title">
+            <!-- Create random target color -->
+            <span id="rand-target-color"> </span>
+          </h3>
+        </div>
+        <div id="container">
+          <div class="card-body"></div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      // JavaScript function that wraps everything
+      $(document).ready(function() {
+        // Array for word colors
+        var colorsOfText = [];
+
+        // Target word color
+        var targetColorOfText;
+
+        // User"s selection
+        var userAnswer;
+
+        // Array for words
+        var colors = ["brown", "blue", "magenta", "teal", "coral", "black"];
+        var usedColors = [];
+        var targetColor = colors[Math.floor(Math.random() * colors.length)];
+        //function to create Current Color and Color list
+        function displayColors() {
+          //current color
+          $("#rand-target-color").html(targetColor);
+          //color list
+          var cont = $("#container");
+          var ul = $("<ul>");
+          ul.attr("style", "padding: 0; margin: 0;");
+          ul.attr("id", "theList");
+          for (i = 0; i <= colors.length - 1; i++) {
+            var li = $("<li>"); // create li element.
+            li.html(colors[i]); // assigning text to li using array value.
+            li.attr("style", "display: block;"); // remove the bullets.
+            // li.on("click", event => colorClick(event));
+            li.click(function(event) {
+              if (this.style.color == targetColor) {
+                alert(
+                  "yay! listText: " +
+                    this.style.color +
+                    "= TargetColor: " +
+                    targetColor
+                );
+                createColorPicker(colors);
+                console.log(createColorPicker(colors));
+              } else {
+                console.log(this.style.color);
+                alert("Wrong color");
+              }
+            });
+            ul.append(li); // append li to ul.
+          }
+          cont.append(ul); // add list to the container.
+          $("li").each(function() {
+            $(this).css("color", randomColor());
+            console.log(this.style.color);
+          });
+
+          function randomColor() {
+            var newColor = colors[Math.floor(Math.random() * colors.length)];
+            //check to see if color exists in usedColors array
+            if (usedColors.includes(newColor)) {
+              // run randomColor again to pick a vacant color
+              newColor = randomColor();
+            } else if (!usedColors.includes(newColor)) {
+              //if new color is not in usedColor add the color to usedColor array
+              usedColors.push(newColor);
+            }
+            return newColor;
+          }
+        }
+        displayColors();
+
+        function colorClick(event) {
+          // if ($("li").style.color == targetColor) {
+          //   colorClick();
+          // } else {
+          //   alert("Wrong color");
+          // }
+          console.log(event.li);
+        }
+
+        // This function creates the actual "game" logic.
+        function createColorPicker(array) {
+          //start shuffling array using Fisher-Yates (aka Knuth) Shuffle.
+          let currentIndex = array.length,
+            randomIndex;
+
+          // While there remain elements to shuffle.
+          while (currentIndex != 0) {
+            // Pick a remaining element.
+            randomIndex = Math.floor(Math.random() * currentIndex);
+            currentIndex--;
+
+            // And swap it with the current element.
+            [array[currentIndex], array[randomIndex]] = [
+              array[randomIndex],
+              array[currentIndex]
+            ];
+            var colors = createColorPicker(array);
+            console.log(colors);
+          }
+          return array;
+          // Push to text color array
+          // Shuffle text color array
+          // Loop through all colors in the array
+          // Create element to hold word
+          // Output a word
+          // Make word a random color
+        }
+
+        // $("#container").on("click", function() {
+        //   createColorPicker(colors);
+        //   console.log(colors);
+        // });
+        // Clear the divs and arrays upon each round.
+        function clear() {}
+
+        // Function for resetting colors and setting new colors.
+        function reset() {}
+
+        // Get id of element clicked by user
+        $("#color-picker").click(function(event) {});
+
+        // Run game
+        reset();
+      });
+    </script>
+  </body>
+</html>

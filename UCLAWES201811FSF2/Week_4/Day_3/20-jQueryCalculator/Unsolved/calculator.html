@@ -153,36 +153,60 @@
         // });
 
         //third attempt
-        var count = 0;
         // var button = document.querySelectorAll("button");
         var countDisplay = document.getElementById("count");
         var firstNumDisplay = $("#first-number");
         var operatorDisplay = $("#operator");
         var secondNumDisplay = $("#second-number");
         var resultDisplay = $("#result");
+        var operator;
+        var result;
+        var firstNum = [];
+        var secondNum = [];
 
-        function result(x, y, z) {}
-
-        document.addEventListener("click", function(event) {
+        $("button").click(function(event) {
           var btn = event.target.closest("button");
-          if (btn) {
-            count++;
-            countDisplay.innerHTML = "Number of click events: " + count;
-          }
-          if (count === 1) {
-            var firstNum = btn.value;
-            console.log(firstNum);
-            firstNumDisplay.append(btn.textContent || btn.innerText);
-          }
-          if (count === 2) {
-            var operator = btn.value;
-            console.log(operator);
-            operatorDisplay.append(btn.textContent || btn.innerText);
-          }
-          if (count === 3) {
-            var secondNum = btn.value;
-            console.log(secondNum);
-            secondNumDisplay.append(btn.textContent || btn.innerText);
+
+          // firstNumDisplay.append(btn.textContent || btn.innerText);
+
+          switch (btn.value) {
+            case "minus":
+              operator = " - ";
+              break;
+            case "plus":
+              operator = "+";
+              break;
+            case "times":
+              operator = "*";
+              break;
+            case "power":
+              operator = "**";
+              break;
+            case "divide":
+              operator = "/";
+              break;
+            case "equals":
+              result = eval(firstNum.join("") + operator + secondNum.join(""));
+              console.log(result);
+              break;
+            case "clear":
+              operator = btn.value = undefined;
+              secondNum = [];
+              firstNum = [];
+              console.log("firstNum is: " + firstNum);
+              console.log("operator is: " + operator);
+              console.log("secondNum is: " + secondNum);
+            default:
+              //number pressed
+              if (operator == undefined) {
+                firstNum.push(btn.value);
+                console.log("first Num is: " + firstNum.join(""));
+              } else {
+                secondNum.push(btn.value);
+                operator = operator;
+                console.log("second num is: " + secondNum.join(""));
+                console.log("operator is: " + operator);
+              }
           }
         });
       });
